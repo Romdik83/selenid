@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class cardDeliveryTest {
+public class CardDeliveryTest {
     public String generateDate(int days) {
         return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
@@ -21,7 +21,6 @@ public class cardDeliveryTest {
     @Test
     void orderingABankCard() {
         Selenide.open("http://localhost:9999");
-        $$("input");
         $("[placeholder='Город']").setValue("Воронеж");
         $("[placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
         $("[placeholder='Дата встречи']").setValue(generateDate(3));
@@ -37,7 +36,6 @@ public class cardDeliveryTest {
     @Test
     void choosingACityBasedOnTheFirstTwoLetters() {
         Selenide.open("http://localhost:9999");
-        $$("input");
         $("[placeholder='Город']").setValue("Во");
         $$("div.popup__content div").find(exactText("Воронеж")).click();
         $("[placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
@@ -54,7 +52,6 @@ public class cardDeliveryTest {
     @Test
     void choosingADateForTheWeekAhead() {
         Selenide.open("http://localhost:9999");
-        $$("input");
         $("[placeholder='Город']").setValue("Ли");
         $$("div.popup__content div").find(exactText("Липецк")).click();
         $("[placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
