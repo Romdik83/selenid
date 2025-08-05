@@ -21,12 +21,12 @@ public class CardDeliveryTest {
     @Test
     void orderingABankCard() {
         Selenide.open("http://localhost:9999");
-        $("[placeholder='Город']").setValue("Воронеж");
-        $("[placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[placeholder='Дата встречи']").setValue(generateDate(3));
-        $("[name='name']").setValue("Новикова Оксана");
-        $("[name='phone']").setValue("+79150000000");
-        $("[data-test-id='agreement']").click();
+        $$("[placeholder='Город']").find(Condition.visible).setValue("Воронеж");
+        $$("[placeholder='Дата встречи']").find(Condition.visible).doubleClick().sendKeys(Keys.BACK_SPACE);
+        $$("[placeholder='Дата встречи']").find(Condition.visible).setValue(generateDate(3));
+        $$("[name='name']").find(Condition.visible).setValue("Новикова Оксана");
+        $$("[name='phone']").find(Condition.visible).setValue("+79150000000");
+        $$("[data-test-id='agreement']").find(Condition.visible).click();
         $$("button").find(text("Забронировать")).click();
         $(Selectors.withText("Успешно!"))
                 .shouldBe(Condition.visible, Duration.ofSeconds(15));
@@ -36,13 +36,13 @@ public class CardDeliveryTest {
     @Test
     void choosingACityBasedOnTheFirstTwoLetters() {
         Selenide.open("http://localhost:9999");
-        $("[placeholder='Город']").setValue("Во");
+        $("[data-test-id='city'] [placeholder='Город']").setValue("Во");
         $$("div.popup__content div").find(exactText("Воронеж")).click();
-        $("[placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
-        $("[placeholder='Дата встречи']").setValue(generateDate(3));
-        $("[name='name']").setValue("Новикова Оксана");
-        $("[name='phone']").setValue("+79150000000");
-        $("[data-test-id='agreement']").click();
+        $("[data-test-id='date'] [placeholder='Дата встречи']").doubleClick().sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id='date'] [placeholder='Дата встречи']").setValue(generateDate(3));
+        $("[data-test-id='name'] [name='name']").setValue("Новикова Оксана");
+        $("[data-test-id='phone'] [name='phone']").setValue("+79150000000");
+        $("label[data-test-id='agreement']").click();
         $$("button").find(text("Забронировать")).click();
         $(Selectors.withText("Успешно!"))
                 .shouldBe(Condition.visible, Duration.ofSeconds(15));
